@@ -10,16 +10,16 @@ function jobStatus(job) {
 
 // TODO: give information here as to why id errored/failed?
 function jobDescription(job) {
-    var runnerLogPath = path.resolve(__dirname, 'unit-test-runner.log');
+    var runnerLogPath = path.resolve('/home/strider/.strider/data', job._id, 'unit-test-runner.log');
     var errorsLogPath = path.resolve(__dirname, 'unit-test-errors.log');
 
-    console.log('Log files... ', job);
+    debug('Log job... ', job);
 
     var runnerLog = fs.readFileSync(runnerLogPath);
     var errorsLog = fs.readFileSync(errorsLogPath);
 
-    console.log('logFileContents', runnerLog);
-    console.log('logFileContents', errorsLog);
+    debug('logFileContents', runnerLog);
+    debug('logFileContents', errorsLog);
 
     if (job.errored) return 'Strider tests errored'
     return 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed').concat('\n' + runnerLog);
