@@ -13,16 +13,14 @@ function jobDescription(job) {
     var runnerLogPath = path.resolve(__dirname, 'unit-test-runner.log');
     var errorsLogPath = path.resolve(__dirname, 'unit-test-errors.log');
 
-    var runnerLog = fs.readFile(runnerLogPath, function(err, logFile) {
-        debug('logFileContents', logFile);
-    });
+    var runnerLog = fs.readFileSync(runnerLogPath);
+    var errorsLog = fs.readFileSync(errorsLogPath);
 
-    var errorsLog = fs.readFile(errorsLogPath, function(err, logFile) {
-        debug('logFileContents', logFile);
-    });
+    console.log('logFileContents', runnerLog);
+    console.log('logFileContents', errorsLog);
 
     if (job.errored) return 'Strider tests errored'
-    return 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed')
+    return 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed').concat('\n' + errorsLog);
 }
 
 module.exports = {
