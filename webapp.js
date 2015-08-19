@@ -20,7 +20,7 @@ function jobDescription(job) {
     console.log('logFileContents', errorsLog);
 
     if (job.errored) return 'Strider tests errored'
-    return 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed').concat('\n' + errorsLog);
+    return 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed').concat('\n' + runnerLog);
 }
 
 module.exports = {
