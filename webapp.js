@@ -13,6 +13,8 @@ function jobDescription(job) {
     var runnerLogPath = path.resolve(__dirname, 'unit-test-runner.log');
     var errorsLogPath = path.resolve(__dirname, 'unit-test-errors.log');
 
+    console.log('Log files... ', job);
+
     var runnerLog = fs.readFileSync(runnerLogPath);
     var errorsLog = fs.readFileSync(errorsLogPath);
 
