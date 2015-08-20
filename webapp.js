@@ -16,18 +16,19 @@ function jobDescription(job, projectName) {
     var runnerLogPath = path.resolve(['/home/strider/.strider/data', [slug, job._id].join('-'), 'unit-test-runner.log'].join('/'));
     var runnerLog = fs.existsSync(runnerLogPath) ? fs.readFileSync(runnerLogPath).toString() : '';
 
-    debug(job);
+    debug(Object.keys(job));
     debug('LogPath', slug, runnerLogPath);
+    debug('RunnerLog', runnerLog);
 
     if (job.errored) {
         description = 'Strider tests errored'
     } else {
-        description = 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed') + '\n' + runnerLog;
+        description = 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed')
     }
 
     debug('Description', description);
 
-    return description;
+    return [ description, runnerLog ].join('\n');
 }
 
 module.exports = {
