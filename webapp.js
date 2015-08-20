@@ -16,7 +16,7 @@ function jobDescription(job, projectName) {
     var runnerLogPath = path.resolve(['/home/strider/.strider/data', [slug, job._id].join('-'), 'unit-test-runner.log'].join('/'));
     var runnerLog = fs.existsSync(runnerLogPath) ? fs.readFileSync(runnerLogPath).toString() : '';
 
-    debug('Job Data', JSON.Stringify(job, false, 4));
+    debug(job);
     debug('LogPath', slug, runnerLogPath);
     debug('Description', description);
 
