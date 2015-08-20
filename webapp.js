@@ -18,13 +18,14 @@ function jobDescription(job, projectName) {
 
     debug(job);
     debug('LogPath', slug, runnerLogPath);
-    debug('Description', description);
 
     if (job.errored) {
         description = 'Strider tests errored'
     } else {
         description = 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed') + '\n' + runnerLog;
     }
+
+    debug('Description', description);
 
     return description;
 }
