@@ -18,7 +18,7 @@ function jobDescription(job) {
     if (job.errored) description = 'Strider tests errored'
     description = 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed').concat('\n' + runnerLog);
 
-    debug('Description', job, Description)
+    debug('Description', job, description, runnerLogPath);
 
     return description;
 }
