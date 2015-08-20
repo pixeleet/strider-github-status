@@ -10,19 +10,17 @@ function jobStatus(job) {
 
 // TODO: give information here as to why id errored/failed?
 function jobDescription(job) {
-    var runnerLogPath = path.resolve('/home/strider/.strider/data', job._id, 'unit-test-runner.log');
-    var errorsLogPath = path.resolve(__dirname, 'unit-test-errors.log');
 
-    debug('Log job... ', job);
+    var description;
+    var runnerLogPath = path.resolve('/home/strider/.strider/data', 'pixeleet-sweebr-', job._id, 'unit-test-runner.log');
+    var runnerLog = fs.existsSync(runnerLogPath) ? fs.readFileSync(runnerLogPath) : '';
 
-    var runnerLog = fs.readFileSync(runnerLogPath);
-    var errorsLog = fs.readFileSync(errorsLogPath);
+    if (job.errored) description = 'Strider tests errored'
+    description = 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed').concat('\n' + runnerLog);
 
-    debug('logFileContents', runnerLog);
-    debug('logFileContents', errorsLog);
+    debug('Description', job, Description)
 
-    if (job.errored) return 'Strider tests errored'
-    return 'Strider tests ' + (job.test_exitcode === 0 ? 'succeeded' : 'failed').concat('\n' + runnerLog);
+    return description;
 }
 
 module.exports = {
@@ -36,6 +34,7 @@ module.exports = {
 
         io.on('plugin.github-status.done', function(jobId, projectName, token, data) {
             var onDoneAndSaved = function(job) {
+                debug('onDoneAndSaved [job]', job);
                 if (job._id.toString() !== jobId.toString()) return
                 debug('plugin done', jobId, projectName, token, data)
 
