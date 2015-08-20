@@ -15,7 +15,7 @@ function jobDescription(job) {
     var slug = job.project.name.replace('/', '-');
     var runnerLogPath = path.resolve(['/home/strider/.strider/data', [slug, job._id].join('-'), 'unit-test-runner.log'].join('/'));
     // var runnerLog = fs.existsSync(runnerLogPath) ? fs.readFileSync(runnerLogPath).toString() : '';
-    var runnerLog = fs.readFileSync(runnerLogPath).toString();
+    var runnerLog = fs.readFileSync(runnerLogPath);
 
     debug(Object.keys(job));
     debug('LogPath', slug, runnerLogPath, fs.existsSync(runnerLogPath));
