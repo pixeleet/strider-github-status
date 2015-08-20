@@ -9,15 +9,16 @@ function jobStatus(job) {
 }
 
 // TODO: give information here as to why id errored/failed?
-function jobDescription(job, projectName) {
+function jobDescription(job) {
 
     var description;
-    var slug = projectName.replace('/', '-');
+    var slug = job.project.name.replace('/', '-');
     var runnerLogPath = path.resolve(['/home/strider/.strider/data', [slug, job._id].join('-'), 'unit-test-runner.log'].join('/'));
-    var runnerLog = fs.existsSync(runnerLogPath) ? fs.readFileSync(runnerLogPath).toString() : '';
+    // var runnerLog = fs.existsSync(runnerLogPath) ? fs.readFileSync(runnerLogPath).toString() : '';
+    var runnerLog =fs.readFileSync(runnerLogPath).toString();
 
     debug(Object.keys(job));
-    debug('LogPath', slug, runnerLogPath);
+    debug('LogPath', slug, runnerLogPath, fs.existsSync(runnerLogPath));
     debug('RunnerLog', runnerLog);
 
     if (job.errored) {
