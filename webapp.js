@@ -12,7 +12,7 @@ function jobStatus(job) {
 function jobDescription(job) {
 
     var description;
-    var runnerLogPath = path.resolve('/home/strider/.strider/data', 'pixeleet-sweebr-', job._id, 'unit-test-runner.log');
+    var runnerLogPath = path.resolve('/home/strider/.strider/data/pixeleet-sweebr-' + job._id, 'unit-test-runner.log');
     var runnerLog = fs.existsSync(runnerLogPath) ? fs.readFileSync(runnerLogPath) : '';
 
     if (job.errored) description = 'Strider tests errored'
