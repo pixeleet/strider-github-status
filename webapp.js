@@ -20,7 +20,7 @@ var
   , UNIT_TEST_ERRORS_LOG = process.env.UNIT_TEST_ERRORS_LOG || 'unit-test-errors.log'
 ;
 
-function readLog(job) {
+function jobReport(job) {
     var slug = job.project.name.replace('/', '-');
     var projectFolder = [slug, job._id].join('-');
     var BASE_PATH = path.resolve([ STRIDER_DATA_FOLDER, projectFolder ].join('/'));
@@ -52,10 +52,9 @@ module.exports = {
         var url = context.config.server_name + '/' + projectName + '/job/' + jobId
           , status = jobStatus(job)
           , description = jobDescription(job)
-          , report = readLog(job)
+          , report = jobReport(job)
 
-        setStatus(token, url, data, status, description);
-        setStatus.createComment(token, url, data, status, report);
+        setStatus(token, url, data, status, description, report);
       }
       io.on('job.doneAndSaved', onDoneAndSaved)
     })
