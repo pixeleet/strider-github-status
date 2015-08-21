@@ -1,6 +1,8 @@
 var setStatus = require('./lib/handler').setStatus
   , createComment = require('./lib/handler').createComment
-  , debug = require('debug')('strider-github-status');
+  , debug = require('debug')('strider-github-status')
+  , path = require('path')
+  , fs = require('fs');
 
 function jobStatus(job) {
   if (job.errored) return 'error'
