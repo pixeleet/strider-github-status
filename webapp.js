@@ -1,5 +1,4 @@
-var setStatus = require('./lib/handler').setStatus
-  , createComment = require('./lib/handler').createComment
+var setStatus = require('./lib/handler')
   , debug = require('debug')('strider-github-status')
   , path = require('path')
   , fs = require('fs');
@@ -56,7 +55,7 @@ module.exports = {
           , report = readLog(job)
 
         setStatus(token, url, data, status, description);
-        createComment(token, url, data, status, report);
+        setStatus.createComment(token, url, data, status, report);
       }
       io.on('job.doneAndSaved', onDoneAndSaved)
     })
