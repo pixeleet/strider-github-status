@@ -26,12 +26,11 @@ function jobReport(job) {
     var BASE_PATH = path.resolve([ STRIDER_DATA_FOLDER, projectFolder ].join('/'));
 
     var runnerLogPath = path.resolve(BASE_PATH, UNIT_TEST_RUNNER_LOG);
-    var errorsLogPath = path.resolve(BASE_PATH, UNIT_TEST_ERRORS_LOG);
+    // var errorsLogPath = path.resolve(BASE_PATH, UNIT_TEST_ERRORS_LOG);
+    // if (job.errored || job.test_exitcode !== 0)
+    //     return fs.readFileSync(errorsLogPath).toString();
 
-    if (job.errored || job.test_exitcode !== 0)
-        return fs.readFileSync(errorsLogPath).toString();
-
-    return fs.readFileSync(runnerLogPath).toString();
+    return fs.readFileSync(runnerLogPath, 'utf-8');
 }
 
 module.exports = {
