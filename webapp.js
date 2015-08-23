@@ -29,9 +29,9 @@ function jobReport(job) {
     var errorsLogPath = path.resolve(BASE_PATH, UNIT_TEST_ERRORS_LOG);
 
     if (job.errored || job.test_exitcode !== 0)
-        return fs.readFileSync(errorsLogPath);
+        return fs.readFileSync(errorsLogPath).toString();
 
-    return fs.readFileSync(runnerLogPath);
+    return fs.readFileSync(runnerLogPath).toString();
 }
 
 module.exports = {
