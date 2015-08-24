@@ -26,9 +26,9 @@ function jobReport(job) {
     var BASE_PATH = path.resolve([ STRIDER_DATA_FOLDER, projectFolder ].join('/'));
 
     var runnerLogPath = path.resolve(BASE_PATH, UNIT_TEST_RUNNER_LOG);
-    // var errorsLogPath = path.resolve(BASE_PATH, UNIT_TEST_ERRORS_LOG);
-    // if (job.errored || job.test_exitcode !== 0)
-    //     return fs.readFileSync(errorsLogPath).toString();
+    var errorsLogPath = path.resolve(BASE_PATH, UNIT_TEST_ERRORS_LOG);
+    if (job.errored || job.test_exitcode !== 0)
+        return fs.readFileSync(errorsLogPath, 'utf-8');
 
     return fs.readFileSync(runnerLogPath, 'utf-8');
 }
