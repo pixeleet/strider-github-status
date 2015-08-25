@@ -24,13 +24,12 @@ function jobReport(job) {
     var slug = job.project.name.replace('/', '-');
     var projectFolder = [slug, job._id].join('-');
     var BASE_PATH = path.resolve([ STRIDER_DATA_FOLDER, projectFolder ].join('/'));
-
-    var runnerLogPath = path.resolve(BASE_PATH, UNIT_TEST_RUNNER_LOG);
     var errorsLogPath = path.resolve(BASE_PATH, UNIT_TEST_ERRORS_LOG);
+    
     if (job.errored || job.test_exitcode !== 0)
         return fs.readFileSync(errorsLogPath, 'utf-8');
 
-    return fs.readFileSync(runnerLogPath, 'utf-8');
+    return 'All tests pass. Ready to merge.'
 }
 
 module.exports = {
